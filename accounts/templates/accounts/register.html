@@ -1,0 +1,16 @@
+{% extends 'accounts/base.html' %}
+
+{% load staticfiles %}
+
+{% block form %}
+<form method="post" action="{% url 'accounts:register' %}" class="register-form">
+	{% csrf_token %}
+	{{ form.username }}
+	{{ form.email }}
+	{{ form.password1 }}
+	{{ form.password2 }}
+
+    <button type="submit">create</button>
+   	<p class="message">Already registered? <a href="{% url 'accounts:login' %}">Sign In</a></p>
+</form>
+{% endblock %}

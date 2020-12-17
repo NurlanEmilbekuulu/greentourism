@@ -1,0 +1,95 @@
+{% extends 'index/base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+<aside id="colorlib-hero">
+			<div class="flexslider">
+				<ul class="slides">
+			   	<li style="background-image: url({% static 'images/slide_images/ploshad.jpg' %});">
+			   		<div class="overlay"></div>
+			   		<div class="container-fluid">
+			   			<div class="row">
+				   			<div class="col-md-6 col-md-offset-3 col-sm-12 col-xs-12 slider-text">
+				   				<div class="slider-text-inner text-center">
+				   					<h2>Green Tourism</h2>
+				   					<h1>Contact us</h1>
+				   				</div>
+				   			</div>
+				   		</div>
+			   		</div>
+			   	</li>
+			  	</ul>
+		  	</div>
+		</aside>
+
+		<div id="colorlib-contact">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-10 col-md-offset-1 animate-box">
+						<h3>Get In Touch</h3>
+						<form method='POST' action="{% url 'index:contact' %}">
+							{% csrf_token %}
+							<div class="row form-group">
+								<div class="col-md-6 padding-bottom">
+									<label for="fname">First Name</label>
+									{{ contact_form.fname }}
+								</div>
+								<div class="col-md-6">
+									<label for="lname">Last Name</label>
+									{{ contact_form.lname }}
+								</div>
+							</div>
+
+							<div class="row form-group">
+								<div class="col-md-12">
+									<label for="email">Email</label>
+									{{ contact_form.email }}
+								</div>
+							</div>
+
+							<div class="row form-group">
+								<div class="col-md-12">
+									<label for="subject">Subject</label>
+									{{ contact_form.subject }}
+								</div>
+							</div>
+
+							<div class="row form-group">
+								<div class="col-md-12">
+									<label for="message">Message</label>
+									{{ contact_form.message }}
+								</div>
+							</div>
+							<div class="form-group text-center">
+								<input type="submit" value="Send Message" class="btn btn-primary">
+							</div>
+
+						</form>		
+					</div>
+					<div class="col-md-10 col-md-offset-1 animate-box">
+						<h3>Contact Information</h3>
+						<div class="row contact-info-wrap">
+							<div class="col-md-3">
+								<p><span><i class="icon-location"></i></span>
+									{{contact.address}}
+								</p>
+							</div>
+							<div class="col-md-2">
+								<p><span><i class="icon-phone3"></i></span> <a href="tel://{{contact.phone}}">{{contact.phone}}</a></p>
+							</div>
+							<div class="col-md-4">
+								<p><span><i class="icon-paperplane"></i></span> <a href="https://mail.google.com">{{contact.email}}</a></p>
+							</div>
+							<div class="col-md-3">
+								<p><span><i class="icon-globe"></i></span> <a href="{% url 'index:about' %}">{{contact.site}}</a></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--<div id="map" class="colorlib-map"></div>-->
+		<iframe  class="well well-sm col-xs-12" src="{{contact.location}}" height="600" allowfullscreen></iframe>
+{% endblock %}

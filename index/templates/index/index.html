@@ -1,0 +1,520 @@
+{% extends 'index/base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+<aside id="colorlib-hero">
+			<div class="flexslider">
+				<ul class="slides">
+					{% for slide in slides %}
+				   	<li style="background-image: url({{ slide.image.url }});">
+				   		<div class="overlay"></div>
+				   		<div class="container-fluid">
+				   			<div class="row">
+					   			<div class="col-md-6 col-md-offset-3 col-sm-12 col-xs-12 slider-text">
+					   				<div class="slider-text-inner text-center">
+					   					<h2>{{ slide.subtitle }}</h2>
+					   					<h1><a href="{{slide.tour.get_absolute_url}}">
+					   					{{ slide.title }}
+					   					</a></h1>
+					   				</div>
+					   			</div>
+					   		</div>
+				   		</div>
+				   	</li>
+				   	{% endfor %}   	
+			  	</ul>
+		  	</div>
+		</aside>
+		<div id="colorlib-reservation">
+			<!-- <div class="container"> -->
+				<div class="row">
+					<div class="search-wrap">
+						<div class="container">
+							<ul class="nav nav-tabs">
+								<li class="active"><a data-toggle="tab" href="#flight"><i class="flaticon-plane"></i> Tour</a></li>
+								<li><a data-toggle="tab" href="#hotel"><i class="flaticon-resort"></i> Hotel</a></li>
+							</ul>
+						</div>
+						<div class="tab-content">
+							<div id="flight" class="tab-pane fade in active">
+								<form method="get" class="colorlib-form" action="{% url 'index:search_tour' %}">
+				              	<div class="row">
+				              	 <div class="col-md-3">
+				              	 	<div class="form-group">
+				                    <label for="date">Where:</label>
+				                    <div class="form-field">
+				                      <input type="text" name='q' id="location" class="form-control" placeholder="Search Location">
+				                    </div>
+				                  </div>
+				              	 </div>
+				                <div class="col-md-2">
+				                  <div class="form-group">
+				                    <label for="date">Check-in:</label>
+				                    <div class="form-field">
+				                      <i class="icon icon-calendar2"></i>
+				                      <input type="text" id="date" class="form-control date" placeholder="Check-in date">
+				                    </div>
+				                  </div>
+				                </div>
+				                <div class="col-md-2">
+				                  <div class="form-group">
+				                    <label for="date">Check-out:</label>
+				                    <div class="form-field">
+				                      <i class="icon icon-calendar2"></i>
+				                      <input type="text" id="date" class="form-control date" placeholder="Check-out date">
+				                    </div>
+				                  </div>
+				                </div>
+				                <div class="col-md-3">
+				                  <div class="form-group">
+				                    <label for="guests">Guest</label>
+				                    <div class="form-field">
+				                      <i class="icon icon-arrow-down3"></i>
+				                      <select name="people" id="people" class="form-control">
+				                        <option value="#">1</option>
+				                        <option value="#">2</option>
+				                        <option value="#">3</option>
+				                        <option value="#">4</option>
+				                        <option value="#">5+</option>
+				                      </select>
+				                    </div>
+				                  </div>
+				                </div>
+				                <div class="col-md-2">
+				                  <input type="submit" name="submit" id="submit" value="Find Tours" class="btn btn-primary btn-block">
+				                </div>
+				              </div>
+				            </form>
+				         </div>
+				         <div id="hotel" class="tab-pane fade">
+						      <form method="get" class="colorlib-form" action="{% url 'index:search_hotel' %}">
+				              	<div class="row">
+				              	 <div class="col-md-3">
+				              	 	<div class="form-group">
+				                    <label for="date">Where:</label>
+				                    <div class="form-field">
+				                      <input type="text" name='q' id="location" class="form-control" placeholder="Search Location">
+				                    </div>
+				                  </div>
+				              	 </div>
+				                <div class="col-md-2">
+				                  <div class="form-group">
+				                    <label for="date">Check-in:</label>
+				                    <div class="form-field">
+				                      <i class="icon icon-calendar2"></i>
+				                      <input type="text" id="date" class="form-control date" placeholder="Check-in date">
+				                    </div>
+				                  </div>
+				                </div>
+				                <div class="col-md-2">
+				                  <div class="form-group">
+				                    <label for="date">Check-out:</label>
+				                    <div class="form-field">
+				                      <i class="icon icon-calendar2"></i>
+				                      <input type="text" id="date" class="form-control date" placeholder="Check-out date">
+				                    </div>
+				                  </div>
+				                </div>
+				                <div class="col-md-3">
+				                  <div class="form-group">
+				                    <label for="guests">Guest</label>
+				                    <div class="form-field">
+				                      <i class="icon icon-arrow-down3"></i>
+				                      <select name="people" id="people" class="form-control">
+				                        <option value="#">1</option>
+				                        <option value="#">2</option>
+				                        <option value="#">3</option>
+				                        <option value="#">4</option>
+				                        <option value="#">5+</option>
+				                      </select>
+				                    </div>
+				                  </div>
+				                </div>
+				                <div class="col-md-2">
+				                  <input type="submit" name="submit" id="submit" value="Find Hotel" class="btn btn-primary btn-block">
+				                </div>
+				              </div>
+				            </form>
+						   </div>
+			         	</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="colorlib-services">
+			<div class="container">
+				<div class="row no-gutters">
+					{% for service in services %}
+					<div class="col-md-3 animate-box text-center {% if forloop.first %}aside-stretch{% endif %} ">
+						<div class="services">
+							<span class="icon">
+								<i class="{{ service.icon }}"></i>
+							</span>
+							<h3>{{ service.name }}</h3>
+							<p>{{ service.description }}</p>
+						</div>
+					</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+
+		<div class="colorlib-tour colorlib-light-grey">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 col-md-offset-3 text-center colorlib-heading animate-box">
+						<h2>Popular Destinations</h2>
+						<p>Tours with guaranteed dates! Pick up from Bishkek’s Airport and  different cities of Kyrgyzstan. Cultural, adventure, hiking and trekking trips. Best selection of itineraries. Click  the pictures below and read more,register to website and  book after that.</p>
+					</div>
+				</div>
+			</div>
+			<div class="tour-wrap">
+				{% for tour in tours %}
+				<a href="{{ tour.get_absolute_url }}" class="tour-entry animate-box">
+					<div class="tour-img" style="background-image: url({{ tour.image.url }});">
+					</div>
+					<span class="desc">
+						<p class="star">
+							<span>
+								{% if tour.rating == 1 %}
+								<i class="icon-star-full"></i>
+								<i class="icon-star-empty"></i>
+								<i class="icon-star-empty"></i>
+								<i class="icon-star-empty"></i>
+								<i class="icon-star-empty"></i>
+								{% elif tour.rating == 2 %}
+								<i class="icon-star-full"></i>
+								<i class="icon-star-full"></i>
+								<i class="icon-star-empty"></i>
+								<i class="icon-star-empty"></i>
+								<i class="icon-star-empty"></i>
+								{% elif	tour.rating == 3 %}
+								<i class="icon-star-full"></i>
+								<i class="icon-star-full"></i>
+								<i class="icon-star-full"></i>
+								<i class="icon-star-empty"></i>
+								<i class="icon-star-empty"></i>
+								{% elif	tour.rating == 4 %}
+								<i class="icon-star-full"></i>
+								<i class="icon-star-full"></i>
+								<i class="icon-star-full"></i>
+								<i class="icon-star-full"></i>
+								<i class="icon-star-empty"></i>
+								{% elif	tour.rating == 5 %}
+								<i class="icon-star-full"></i>
+								<i class="icon-star-full"></i>
+								<i class="icon-star-full"></i>
+								<i class="icon-star-full"></i>
+								<i class="icon-star-full"></i>
+								{% endif %}
+							</span> {{tour.view}} Reviews</p>
+						<h2>{{ tour.name }}</h2>
+						<span class="city">{{ tour.place }}</span>
+						<span class="price">${{ tour.price }} / person</span>
+					</span>
+				</a>
+				{% endfor %}
+			</div>
+		</div>
+
+
+		<div id="colorlib-blog">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 col-md-offset-3 text-center colorlib-heading animate-box">
+						<h2>Recent Blog and News</h2>
+					</div>
+				</div>
+				<div class="blog-flex">
+					<div class="f-entry-img" style="background-image: url({% static 'images/content-blog-1.jpg' %});">
+					</div>
+					<div class="blog-entry aside-stretch-right">
+						<div class="row">
+							{% for article in recent_posts %}
+							<div class="col-md-12 animate-box">
+								<a href="{{article.get_absolute_url}}" class="blog-post">
+									<span class="img" 
+									style="background-image: url({{article.preview.url}});">
+									</span>
+									<div class="desc">
+										<span class="date">{{article.pub_date|date:'M d, Y'}}</span>
+										<h3>{{article.title}}</h3>
+										<span class="cat">{{article.category}}</span>
+									</div>
+								</a>
+							</div>
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="colorlib-intro" class="intro-img" style="background-image: url({% static 'images/cover-img-1.jpg' %});" data-stellar-background-ratio="0.5">
+			<div class="overlay"></div>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 animate-box">
+						<div class="intro-desc">
+							<div class="text-salebox">
+								<div class="text-lefts">
+									<div class="sale-box">
+										<div class="sale-box-top">
+											<h2 class="number">{{offer.sale}}</h2>
+											<span class="sup-1">%</span>
+											<span class="sup-2">Off</span>
+										</div>
+										<h2 class="text-sale">Sale</h2>
+									</div>
+								</div>
+								<div class="text-rights">
+									<h3 class="title">Just hurry up limited offer!</h3>
+									<p>{{offer.text}}</p>
+									<p><a href="{{offer.tour.book}}" class="btn btn-primary">Book Now</a> <a href="{{offer.tour.get_absolute_url}}" class="btn btn-primary btn-outline">Read more</a></p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 animate-box">
+						<div class="video-wrap">
+							<div class="video colorlib-video" style="background-image: url({% static 'images/subscribe.jpg' %});">
+								<a href="{% static 'videos/worldng.mp4' %}" class="popup-vimeo"><i class="icon-video"></i></a>
+								<div class="video-overlay"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="colorlib-hotel">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 col-md-offset-3 text-center colorlib-heading animate-box">
+						<h2>Recommended Hotels,Guest houses and Yurts</h2>
+						<p>Welcome on impression with high rating.</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12 animate-box">
+						<div class="owl-carousel">
+							{% for hotel in recommended_hotels %}
+							<div class="item">
+								<div class="hotel-entry">
+									<a href="{{hotel.get_absolute_url}}" class="hotel-img" style="background-image: url({{ hotel.image.url }});">
+										<p class="price"><span>${{hotel.price}}</span><small> /night</small></p>
+									</a>
+									<div class="desc">
+										<p class="star"><span>
+											{% if hotel.rating == 1 %}
+											<i class="icon-star-full"></i>
+											<i class="icon-star-empty"></i>
+											<i class="icon-star-empty"></i>
+											<i class="icon-star-empty"></i>
+											<i class="icon-star-empty"></i>
+											{% elif hotel.rating == 2 %}
+											<i class="icon-star-full"></i>
+											<i class="icon-star-full"></i>
+											<i class="icon-star-empty"></i>
+											<i class="icon-star-empty"></i>
+											<i class="icon-star-empty"></i>
+											{% elif	hotel.rating == 3 %}
+											<i class="icon-star-full"></i>
+											<i class="icon-star-full"></i>
+											<i class="icon-star-full"></i>
+											<i class="icon-star-empty"></i>
+											<i class="icon-star-empty"></i>
+											{% elif	hotel.rating == 4 %}
+											<i class="icon-star-full"></i>
+											<i class="icon-star-full"></i>
+											<i class="icon-star-full"></i>
+											<i class="icon-star-full"></i>
+											<i class="icon-star-empty"></i>
+											{% elif	hotel.rating == 5 %}
+											<i class="icon-star-full"></i>
+											<i class="icon-star-full"></i>
+											<i class="icon-star-full"></i>
+											<i class="icon-star-full"></i>
+											<i class="icon-star-full"></i>
+											{% endif %}
+											</span> {{hotel.view}} Reviews</p>
+										<h3><a href="#">{{ hotel.name }}</a></h3>
+										<span class="place">{{ hotel.place }}</span>
+										<p>{{hotel.summary}}</p>
+									</div>
+								</div>
+							</div>
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="colorlib-testimony" class="colorlib-light-grey">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 col-md-offset-3 text-center colorlib-heading animate-box">
+						<h2>Our Satisfied Guests says</h2>
+						<p></p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-8 col-md-offset-2 animate-box">						
+						<div class="owl-carousel2">
+							{% for comment in comments %}
+							<div class="item">
+								<div class="testimony text-center">
+									<span class="img-user" 
+									style="background-image: url({{comment.image.url}});"></span>
+									<span class="user">{{comment.author}}</span>
+									<small>{{comment.country}}</small>
+									<blockquote>
+										<p>{{comment.text}}</p>
+									</blockquote>
+								</div>
+							</div>
+							{% endfor %}
+						</div>
+					</div>
+				</div>	
+			</div>
+		</div>
+
+		<div class="colorlib-tour">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 col-md-offset-3 text-center colorlib-heading animate-box">
+						<h2>Most Popular Travel Destinations in Kyrgyzstan</h2>
+						<p>We love to tell about wonderful Kyrgyzstan's mountains ,far from your home, here live the blind texts</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="f-tour">
+							<div class="row row-pb-md">
+								<div class="col-md-6">
+									<div class="row">
+										{% for tour in popular_tours_f %}
+										<div class="col-md-6 animate-box">
+											<a  href="{{tour.get_absolute_url}}" class="f-tour-img" style="background-image: url({{tour.image.url}});">
+												<div class="desc">
+													<h3>{{tour.name}}</h3>
+													<p class="price"><span>${{tour.price}}</span> <small>/ person</small></p>
+												</div>
+											</a>
+										</div>
+										{% endfor %}
+									</div>
+								</div>
+								<div class="col-md-6 animate-box">
+									<div class="desc">
+										<div class="row">
+											<div class="col-md-12">
+												<h3>Kyrgyzstan, Asia</h3>
+												<p>The mountains of Kyrgyzstan are the cradle of its people. The landscape has shaped and preserved their nomadic lifestyle and culture for centuries. Step behind the veil of hills which line the roads to discover a world of yurts, galloping horses, grazing livestock and colorful carpets: a world that conjures up the great encampments of Genghis Khan .</p><br>
+											</div>
+											<div class="col-md-12">
+												<h4>Best Tours Destinations</h4>
+												<div class="row">
+													<div class="col-md-4 col-sm-4 col-xs-4">
+														<ul>
+															<li><a href="#">Son-Kol</a></li>
+															<li><a href="#">Kochkor</a></li>
+															<li><a href="#">Bokobaeva</a></li>
+															<li><a href="#">Ala-Archa national park</a></li>
+														</ul>
+													</div>
+													<div class="col-md-4 col-sm-4 col-xs-4">
+														<ul>
+															<li><a href="#">Osh</a></li>
+															<li><a href="#">Jalal-Abad</a></li>
+															<li><a href="#">Talas</a></li>
+															<li><a href="#">Kemin</a></li>
+														</ul>
+													</div>
+													<div class="col-md-4 col-sm-4 col-xs-4">
+														<ul>
+															<li><a href="#">Tokmok</a></li>
+															<li><a href="#">Batken</a></li>
+															<li><a href="#">Alai</a></li>
+															<li><a href="#">Kara-Kol</a></li>
+														</ul>
+													</div>
+												</div>
+												<p><a href="{% url 'index:tours' %}" class="btn btn-primary">View All Places</a></p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="f-tour">
+							<div class="row">
+								<div class="col-md-6 col-md-push-6">
+									<div class="row">
+										{% for tour in popular_tours_l %}
+										<div class="col-md-6 animate-box">
+											<a  href="{{tour.get_absolute_url}}" class="f-tour-img" style="background-image: url({{tour.image.url}});">
+												<div class="desc">
+													<h3>{{tour.name}}</h3>
+													<p class="price"><span>${{tour.price}}</span> <small>/ person</small></p>
+												</div>
+											</a>
+										</div>
+										{% endfor %}
+									</div>
+								</div>
+								<div class="col-md-6 animate-box col-md-pull-6 text-right">
+									<div class="desc">
+										<div class="row">
+											<div class="col-md-12">
+												<h3>Naryn, Kyrgyzstan,Asia</h3>
+												<p>
+												 The Naryn River is a foaming turquoise torrent from its source in the Tien Shan all the way to the Toktogul Reservoir (and onwards into the Syrdarya River).  Son-Kol is about equidistant from Kochkor and Naryn, and many other less famous but no less beautiful jailoos attract shepherds and tranquility-seeking travelers alike.  Finally, the road south from Naryn runs past Tash-Rabat, an ancient caravanserai, on its picturesque ascent to the Torugart Pass into Xingjian, 197km to the southwest. Lake Kel-Suu is one of the most beautiful lakes in Kyrgyzstan. It is located in Naryn, AK-SAI valley, at an altitude of over 3500-3600 meters above sea level in a remote area in the mountains Kokshaal-Too, near the border with China. Therefore, before you get there, you should get used to the altitude.
+												</p><br>
+											</div>
+											<div class="col-md-12">
+												<h4>Best Tours Places</h4>
+												<div class="row">
+													<div class="col-md-4 col-sm-4 col-xs-4">
+														<ul>
+															<li><a href="#"></a></li>
+															<li><a href="#"></a></li>
+															<li><a href="#"></a></li>
+															<li><a href="#"></a></li>
+														</ul>
+													</div>
+													<div class="col-md-4 col-sm-4 col-xs-4">
+														<ul>
+															<li><a href="#">Son-Kol</a></li>
+															<li><a href="#">Kel-Suu</a></li>
+															<li><a href="#">Tash-rabat</a></li>
+															<li><a href="#">Kol-Ukok</a></li>
+														</ul>
+													</div>
+													<div class="col-md-4 col-sm-4 col-xs-4">
+														<ul>
+															<li><a href="#">Sarala-Saz</a></li>
+															<li><a href="#">Kazarman</a></li>
+															<li><a href="#">Kyzyl-Oi</a></li>
+															<li><a href="#">Tash-Rabat</a></li>
+														</ul>
+													</div>
+												</div>
+												<p><a href="{% url 'index:tours' %}" class="btn btn-primary">View All Places</a></p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+{% endblock %}

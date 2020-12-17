@@ -1,0 +1,50 @@
+{% extends 'book/base.html' %}
+
+{% load staticfiles %}
+
+{% block form %}
+<form method="POST" action="{{ room.book }}">
+	{% csrf_token %}
+	<div class="form-group">
+		<span class="form-label">Your Room</span>
+		<p style="font-weight: bold; font-size: 18px; margin-left: 5px;">{{room.name}}</p> 
+	</div>
+	<div class="row">
+		<div class="col-sm-6">
+			<div class="form-group">
+				<span class="form-label">Check In</span>
+				{{ booking_room_form.check_in }}
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<div class="form-group">
+				<span class="form-label">Check out</span>
+				{{ booking_room_form.check_out }}
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-4">
+			<div class="form-group">
+				<span class="form-label">Rooms</span>
+				{{ booking_room_form.rooms }}
+			</div>
+		</div>
+		<div class="col-sm-4">
+			<div class="form-group">
+				<span class="form-label">Adults</span>
+				{{ booking_room_form.adults }}
+			</div>
+		</div>
+		<div class="col-sm-4">
+			<div class="form-group">
+				<span class="form-label">Children</span>
+				{{ booking_room_form.children }}
+			</div>
+		</div>
+	</div>
+	<div class="form-btn">
+		<button class="submit-btn" onclick="alert('Success! Your booking is saved.')">Book Now</button>
+	</div>
+</form>
+{% endblock %}

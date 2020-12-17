@@ -1,0 +1,154 @@
+{% extends 'index/base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+<aside id="colorlib-hero">
+			<div class="flexslider">
+				<ul class="slides">
+			   	<li style="background-image: url({% static 'images/tour-1.jpg' %});">
+			   		<div class="overlay"></div>
+			   		<div class="container-fluid">
+			   			<div class="row">
+				   			<div class="col-md-6 col-md-offset-3 col-sm-12 col-xs-12 slider-text">
+				   				<div class="slider-text-inner text-center">
+				   					<h2>Green Tourism</h2>
+				   					<h1>Find Tours</h1>
+				   				</div>
+				   			</div>
+				   		</div>
+			   		</div>
+			   	</li>
+			  	</ul>
+		  	</div>
+		</aside>
+
+		<div class="colorlib-wrap">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-9">
+						<div class="row">
+							<div class="wrap-division">
+								{% for tour in tours %}
+								<div class="col-md-6 col-sm-6 animate-box">
+									<div class="tour">
+										<a href="{{ tour.get_absolute_url }}" class="tour-img" style="background-image: url({{ tour.image.url }});">
+											<p class="price"><span>${{ tour.price }}</span> <small>/ {{tour.tourday_set.count}} Days</small></p>
+										</a>
+										<span class="desc">
+											<p class="star">
+												<span>
+													{% if tour.rating == 1 %}
+													<i class="icon-star-full"></i>
+													<i class="icon-star-empty"></i>
+													<i class="icon-star-empty"></i>
+													<i class="icon-star-empty"></i>
+													<i class="icon-star-empty"></i>
+													{% elif tour.rating == 2 %}
+													<i class="icon-star-full"></i>
+													<i class="icon-star-full"></i>
+													<i class="icon-star-empty"></i>
+													<i class="icon-star-empty"></i>
+													<i class="icon-star-empty"></i>
+													{% elif	tour.rating == 3 %}
+													<i class="icon-star-full"></i>
+													<i class="icon-star-full"></i>
+													<i class="icon-star-full"></i>
+													<i class="icon-star-empty"></i>
+													<i class="icon-star-empty"></i>
+													{% elif	tour.rating == 4 %}
+													<i class="icon-star-full"></i>
+													<i class="icon-star-full"></i>
+													<i class="icon-star-full"></i>
+													<i class="icon-star-full"></i>
+													<i class="icon-star-empty"></i>
+													{% elif	tour.rating == 5 %}
+													<i class="icon-star-full"></i>
+													<i class="icon-star-full"></i>
+													<i class="icon-star-full"></i>
+													<i class="icon-star-full"></i>
+													<i class="icon-star-full"></i>
+													{% endif %}
+												</span> {{tour.view}} Reviews</p>
+											<h2><a href="{{tour.get_absolute_url}}">{{ tour.name }}</a></h2>
+											<span class="city">{{ tour.place }}</span>
+										</span>
+									</div>
+								</div>
+								{% endfor %}
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<ul class="pagination">
+									<li class="disabled"><a href="#">&laquo;</a></li>
+									<li class="active"><a href="#">1</a></li>
+									<li><a href="#">2</a></li>
+									<li><a href="#">3</a></li>
+									<li><a href="#">4</a></li>
+									<li><a href="#">&raquo;</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+
+					<!-- SIDEBAR-->
+					<div class="col-md-3">
+						<div class="sidebar-wrap">
+							<div class="side search-wrap animate-box">
+								<h3 class="sidebar-heading">Find your tour</h3>
+								<form method="get" class="colorlib-form" action="{% url 'index:search_tour' %}">
+				              	<div class="row">
+				              	 <div class="col-md-12">
+				              	 	<div class="form-group">
+				                    <label for="date">Where:</label>
+				                    <div class="form-field">
+				                      <input type="text" name='q' id="location" class="form-control" placeholder="Search Location">
+				                    </div>
+				                  </div>
+				              	 </div>
+				                <div class="col-md-12">
+				                  <div class="form-group">
+				                    <label for="date">Check-in:</label>
+				                    <div class="form-field">
+				                      <i class="icon icon-calendar2"></i>
+				                      <input type="text" id="date" class="form-control date" placeholder="Check-in date">
+				                    </div>
+				                  </div>
+				                </div>
+				                <div class="col-md-12">
+				                  <div class="form-group">
+				                    <label for="date">Check-out:</label>
+				                    <div class="form-field">
+				                      <i class="icon icon-calendar2"></i>
+				                      <input type="text" id="date" class="form-control date" placeholder="Check-out date">
+				                    </div>
+				                  </div>
+				                </div>
+				                <div class="col-md-12">
+				                  <div class="form-group">
+				                    <label for="guests">Guest</label>
+				                    <div class="form-field">
+				                      <i class="icon icon-arrow-down3"></i>
+				                      <select name="people" id="people" class="form-control">
+				                        <option value="#">1</option>
+				                        <option value="#">2</option>
+				                        <option value="#">3</option>
+				                        <option value="#">4</option>
+				                        <option value="#">5+</option>
+				                      </select>
+				                    </div>
+				                  </div>
+				                </div>
+				                <div class="col-md-12">
+				                  <input type="submit" name="submit" id="submit" value="Find Tour" class="btn btn-primary btn-block">
+				                </div>
+				              </div>
+				            </form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+{% endblock %}

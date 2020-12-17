@@ -1,0 +1,44 @@
+{% extends 'book/base.html' %}
+
+{% load staticfiles %}
+
+{% block form %}
+<form method="POST" action="{{ tour.book }}">
+	{% csrf_token %}
+	<div class="form-group">
+		<span class="form-label">Your Destination</span>
+		<p style="font-weight: bold; font-size: 18px; margin-left: 5px;">{{ tour.name }}</p> 
+	</div>
+	<div class="row">
+		<div class="col-sm-6">
+			<div class="form-group">
+				<span class="form-label">Check In</span>
+				{{ booking_tour_form.check_in }}
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<div class="form-group">
+				<span class="form-label">Check out</span>
+				{{ booking_tour_form.check_out }}
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-6">
+			<div class="form-group">
+				<span class="form-label">Adults</span>
+				{{ booking_tour_form.adults }}
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<div class="form-group">
+				<span class="form-label">Children</span>
+				{{ booking_tour_form.children}}
+			</div>
+		</div>
+	</div>
+	<div class="form-btn">
+		<button id="addButton" class="submit-btn">Book Now</button>
+	</div>
+</form>
+{% endblock %}

@@ -1,0 +1,84 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>Booking</title>
+
+	<!-- Google font -->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+	<!-- Bootstrap -->
+	<link type="text/css" rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+
+	<link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.css' %}">
+
+	<!-- Custom stlylesheet -->
+	<link type="text/css" rel="stylesheet" href="{% static 'css/book-style.css' %}" />
+
+</head>
+
+<body>
+	<div id="booking" class="section" 
+	style="background-image: url({% static 'img/background.jpg' %})">
+		<div class="section-center">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4"></div>
+					<div class="col-md-4">
+						<div class="booking-form">
+							{% block form %}
+
+							{% endblock %}
+						</div>
+
+						<div class="text-center" style="padding: 25px;">
+							<p style="color: #ffffff;">
+								<span><i class="fa fa-arrow-left"></i></span>
+								<a href="/" style="color: inherit;">Back to Home Page</a>
+							</p>
+						</div>
+					</div>
+					<div class="col-md-4"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="{% static 'js/jquery.min.js' %}"></script>
+	<script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
+
+	<script type="text/javascript">
+		$('.date').datepicker({
+			format: 'yyyy-mm-dd',
+		});
+	</script>
+	<script>
+		window.onload = init;
+
+		function init(){
+		    var button = document.getElementById("addButton")
+		    button.onclick = handleButtonClick;
+		}
+		function handleButtonClick() {
+			var textIn = document.getElementById("id_cheak_in");
+		    var textOut = document.getElementById("id_cheak_out");
+		    var textInput = document.getElementById("id_adults");
+		    var textOwner = document.getElementById("id_children");
+
+		    var catName = textInput.value;
+            var OwnerCheak = textOwner.value;
+		    if(catName == "" && OwnerCheak == "" || catName == textInput.value && OwnerCheak == "" || catName == "" && OwnerCheak == textOwner.value){
+		        alert("Fill all the blanks please!!!");
+		    }else{
+		        alert("You booked Succesfully, We will contact with you soon!!,Thanks for your choice");
+		    }
+		}
+	</script>
+</body>
+
+</html>

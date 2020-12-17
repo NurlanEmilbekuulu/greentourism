@@ -1,0 +1,92 @@
+{% extends 'index/base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+<aside id="colorlib-hero">
+			<div class="flexslider">
+				<ul class="slides">
+			   	<li style="background-image: url({% static 'images/cover-blog-6.jpg' %});">
+			   		<div class="overlay"></div>
+			   		<div class="container-fluid">
+			   			<div class="row">
+				   			<div class="col-md-6 col-md-offset-3 col-sm-12 col-xs-12 slider-text">
+				   				<div class="slider-text-inner text-center">
+				   					<h2>Green Tourism</h2>
+				   					<h1>Blog</h1>
+				   				</div>
+				   			</div>
+				   		</div>
+			   		</div>
+			   	</li>
+			  	</ul>
+		  	</div>
+		</aside>
+
+		<div id="colorlib-blog">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8">
+						<div class="wrap-division">
+							{% for article in articles %}
+							<article class="animate-box">
+								<div class="blog-img" style="background-image: url({{article.preview.url}});"></div>
+								<div class="desc">
+									<div class="meta">
+										<p>
+											<span>{{article.published}} </span>
+											<span>{{article.author }} </span>
+											<span>{{article.view}} reviews</span>
+										</p>
+									</div>
+									<h2>{{ article.title }}</h2>
+									<p>{{ article.content|safe }}</p>
+								</div>
+							</article>
+							{% endfor %}
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<ul class="pagination">
+									<li class="disabled"><a href="#">&laquo;</a></li>
+									<li class="active"><a href="#">1</a></li>
+									<li><a href="#">2</a></li>
+									<li><a href="#">3</a></li>
+									<li><a href="#">4</a></li>
+									<li><a href="#">&raquo;</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-4">
+						<div class="sidebar-wrap">
+							<div class="side animate-box">
+								<h3 class="sidebar-heading">Recent Post</h3>
+								{% for article in recent_posts %}
+								<div class="blog-entry-side">
+									<a href="{{ article.get_absolute_url }}" class="blog-post">
+										<span class="img" style="background-image: url({{ article.preview.url }});"></span>
+										<div class="desc">
+											<span class="date">{{article.pub_date|date:'M d, Y'}}</span>
+											<h3>{{ article.title }}</h3>
+											<span class="cat">{{ article.category }}</span>
+										</div>
+									</a>
+								</div>
+								{% endfor %}
+							</div>
+							<div class="side animate-box">
+								<div class="sidebar-heading">Categories</div>
+								<ul class="category">
+									{% for category in article_categories %}
+									<li><a href="{{ category.get_absolute_url }}"><i class="icon-check"></i> {{ category.name }}<span>({{category.article_set.count }})</span></a></li>
+									{% endfor %}
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'index/base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+<aside id="colorlib-hero">
+			<div class="flexslider">
+				<ul class="slides">
+			   	<li style="background-image: url({% static 'images/cover-blog-6.jpg' %});">
+			   		<div class="overlay"></div>
+			   		<div class="container-fluid">
+			   			<div class="row">
+				   			<div class="col-md-6 col-md-offset-3 col-sm-12 col-xs-12 slider-text">
+				   				<div class="slider-text-inner text-center">
+				   					<h2>Green Tourism</h2>
+				   					<h1>Article</h1>
+				   				</div>
+				   			</div>
+				   		</div>
+			   		</div>
+			   	</li>
+			  	</ul>
+		  	</div>
+		</aside>
+
+		<div id="colorlib-blog">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="wrap-division">
+							<article class="animate-box">
+								<div class="desc">
+									<div class="meta">
+										<p>
+											<span>{{article.published}} </span>
+											<span>{{article.author}} </span>
+										</p>
+									</div>
+									<h2>{{ article.title }}</h2>
+									<p>{{ article.content|safe }}</p>
+								</div>
+							</article>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+{% endblock %}

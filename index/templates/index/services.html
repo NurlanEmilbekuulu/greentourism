@@ -1,0 +1,73 @@
+{% extends 'index/base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+<aside id="colorlib-hero">
+			<div class="flexslider">
+				<ul class="slides">
+			   	<li style="background-image: url({% static 'images/cover-service-7.jpg' %});">
+			   		<div class="overlay"></div>
+			   		<div class="container-fluid">
+			   			<div class="row">
+				   			<div class="col-md-6 col-sm-12 col-md-offset-3 slider-text">
+				   				<div class="slider-text-inner text-center">
+				   					<h2>Green Toursim</h2>
+				   					<h1>Our Services</h1>
+				   				</div>
+				   			</div>
+				   		</div>
+			   		</div>
+			   	</li>
+			  	</ul>
+		  	</div>
+		</aside>
+
+		<div id="colorlib-services">
+			<div class="container">
+				<div class="row">
+					{% for service in services %}
+					<div class="col-md-3 animate-box text-center">
+						<div class="services">
+							<span class="icon">
+								<i class="{{ service.icon }}"></i>
+							</span>
+							<h3>{{ service.name }}</h3>
+							<p>{{ service.description }}</p>
+						</div>
+					</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+
+		<div id="colorlib-testimony" class="colorlib-light-grey">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 col-md-offset-3 text-center colorlib-heading animate-box">
+						<h2>Our Satisfied Guests says</h2>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-8 col-md-offset-2 animate-box">						
+						<div class="owl-carousel2">
+							{% for comment in comments %}
+							<div class="item">
+								<div class="testimony text-center">
+									<span class="img-user" 
+									style="background-image: url({{comment.image.url}});"></span>
+									<span class="user">{{comment.author}}</span>
+									<small>{{comment.country}}</small>
+									<blockquote>
+										<p>{{comment.text}}</p>
+									</blockquote>
+								</div>
+							</div>
+							{% endfor %}
+						</div>
+					</div>
+				</div>	
+			</div>
+		</div>
+
+{% endblock %}

@@ -1,0 +1,116 @@
+{% extends 'index/base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+<aside id="colorlib-hero">
+			<div class="flexslider">
+				<ul class="slides">
+			   	<li style="background-image: url({% static 'images/slide_images/skazka_konion.jpg' %});">
+			   		<div class="overlay"></div>
+			   		<div class="container-fluid">
+			   			<div class="row">
+				   			<div class="col-md-6 col-md-offset-3 col-sm-12 col-xs-12 slider-text">
+				   				<div class="slider-text-inner text-center">
+				   					<h2>GREEN TOURISM</h2>
+				   					<h1>About us</h1>
+				   				</div>
+				   			</div>
+				   		</div>
+			   		</div>
+			   	</li>
+			  	</ul>
+		  	</div>
+		</aside>
+
+		<div id="colorlib-about">
+			<div class="container">
+				<div class="row">
+					<div class="about-flex">
+						<div class="col-one-forth aside-stretch animate-box">
+							<!--
+							<div class="row">
+								<div class="col-md-24 about">
+									<h2>Company Services: </h2>
+
+									<ul>
+										<li><a href="#">> Overnight stay in a local family`s house or in a yurt on a jailoo (summer pasture).</a></li>
+										<li><a href="#">> Delicious, traditional food for breakfast, lunch and dinner.</a></li>
+										<li><a href="#">> Trekking the mountains with an English speaking guide.</a></li>
+										<li><a href="#">> Guided horseback riding tours.</a></li>
+										<li><a href="#">> Felt carpet making demonstration and our handicrafts shop.</a></li>
+										<li><a href="#">> Concert of Kyrgyz traditional songs.</a></li>
+										<li><a href="#">> Transport service.</a></li>
+										<li><a href="#">> Guest houses</a></li>
+										<li><a href="#">> Hostels</a></li>
+
+									</ul>
+
+								</div>
+							</div>
+						-->
+						</div>
+						<div class="col-three-forth animate-box">
+							<h2>History</h2>
+							<div class="row">
+								<div class="col-md-12">
+									<p><em style="color: red">Kochkor</em> is a small village in the northern part of Kyrgyzstan, at an altitude of 1800 m. The population counts about 16`000 people. It is located on the main highway A365 from the Torugart Pass northwards towards Bishkek and about 60 km southwest from Balykchy at the Issyk Kul Lake. Although Kochkor is best known as a gateway for accessing its surrounding nature (mainly trips to Son Kol Lake), there is still much more you can visit during your stay in the village. The best is just to explore. The locals are very friendly and willing to strike up a conversation with visitors.</p>
+
+									<p>Every Saturday, Kochkor holds its Animal Bazaar. There you can see Kyrgyz livestock and observe local farmers buying or selling their animals. The bazaar is also a good place to stock up on any essentials that you might be running low on.</p>
+
+									<div class="row row-pb-sm">
+										<div class="col-md-6">
+											<a href="https://goo.gl/maps/xp6BrMjbqUK2">
+												<img class="img-responsive" src="{% static 'images/kochkor.jpg' %}" alt="">
+											</a>
+
+										</div>
+										<div class="col-md-6">
+											<p>In the center there are two bazaars – one for food and the other for clothes. The food bazaar sells wonderful fresh vegetables and fruit. Also you can find bread still warm from the oven with an amazing smell and taste. Shops can provide you with all types of products like cheese, sausage, cream, candy, sweets, water, wine etc.  Kochkor has recently built a new bus station on the main road. From there you can take a share taxi or marshrutka (minibus) to<em style="color: red">Bishkek, Tokmok, Cholpon Ata, Bokonbaeva and Karakol.</em>. </p>
+										</div>
+									</div>
+
+
+									<p><b style="color: #45E27E">GREEN TOURISM</b> – is a local travel agency. The organization was founded in 2017 by indigenous people. Our main goal is to improve the lives of the villagers by involving them in tourism. 85 % of your money paid for whichever service goes to the service provider, 10% to the office, and 5% to nature conservation. There are about 25 members working for our organization. But during the summer time the number grows to more than 100 people. But we are not only interested in profits, we also aim to preserve and enrich our old customs, especially the hospitality of the Kyrgyz people. So, we invite you to stay with us and experience our way of life and our traditions. </p>
+	
+
+						   
+						            <iframe  class="well well-sm col-xs-12" src="{{contact.location}}" height="450" allowfullscreen></iframe>
+						            
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="colorlib-testimony" class="colorlib-light-grey">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 col-md-offset-3 text-center colorlib-heading animate-box">
+						<h2>Our Satisfied Guests says</h2>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-8 col-md-offset-2 animate-box">						
+						<div class="owl-carousel2">
+							{% for comment in comments %}
+							<div class="item">
+								<div class="testimony text-center">
+									<span class="img-user" 
+									style="background-image: url({{comment.image.url}});"></span>
+									<span class="user">{{comment.author}}</span>
+									<small>{{comment.country}}</small>
+									<blockquote>
+										<p>{{comment.text}}</p>
+									</blockquote>
+								</div>
+							</div>
+							{% endfor %}
+						</div>
+					</div>
+				</div>	
+			</div>
+		</div>
+{% endblock %}

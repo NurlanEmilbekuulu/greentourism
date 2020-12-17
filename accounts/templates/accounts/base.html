@@ -1,0 +1,33 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Accounts</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/auth-style.css' %}">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+</head>
+<body>
+<div class="login-page">
+  	<div class="form">
+  		{% if form.non_field_errors %}
+	    <ul class='form-errors'>
+	        {% for error in form.non_field_errors %}
+	            <li>{{ error }}</li>
+	        {% endfor %}
+	    </ul>
+		{% endif %}
+  		{% block form %}
+
+  		{% endblock %}
+  	</div>
+
+  	<div style="padding: 25px; text-align: center;">
+		<p style="color: #ffffff;">
+			<span><i class="fa fa-arrow-left"></i></span>
+			<a href="/" style="color: inherit;">Back to Home Page</a>
+		</p>
+	</div>
+</div>
+</body>
+</html>
